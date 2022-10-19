@@ -11,7 +11,7 @@ router.get('/', shopController.index);
 router.get('/menu', shopController.menu);
 
 /* http://localhost:3000/shop/:id */
-router.get('/:id',[passportJWT.isLogin], shopController.getShopWithMenu);
+router.get('/:id', shopController.getShopWithMenu);
 
 /* http://localhost:3000/shop/ */
 router.post('/', shopController.insert);

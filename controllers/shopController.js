@@ -21,8 +21,9 @@ exports.index = async (req, res, next) => {
         return {
             id: shop._id,
             name: shop.name,
-            // photo: config.DOMAIN + '/images/' + shop.photo,
-            photo: config.DOMAIN_GOOGLE_STORAGE + '/' + shop.photo,
+           // photo: config.DOMAIN + '/images/' + shop.photo,
+           // photo: config.DOMAIN_GOOGLE_STORAGE + '/' + shop.photo,
+           photo: shop.photo,
             location: shop.location
         }
     });
@@ -66,7 +67,7 @@ exports.getShopWithMenu = async (req, res, next) => {
 
  //insert shop
  exports.insert = async (req, res, next) => {
-    const { name, location,photo} = req.body;
+    const { name, location,photo} = req.body;  
 
     let shop = new Shop({
         name: name,
@@ -74,8 +75,9 @@ exports.getShopWithMenu = async (req, res, next) => {
        // photo: await saveImageToDisk(photo)
         photo: await saveImageToGoogle(photo)
     });
-
+   
    await shop.save();
+   
 
     res.status(201).json({
         message: 'เพิ่มข้อมูลร้านอาหารเรียบร้อย'
@@ -100,7 +102,7 @@ async function saveImageToDisk(baseImage) {
         filename = `${uuidv4.v4()}.svg`;
     } else {
         filename = `${uuidv4.v4()}.${ext}`;
-    }
+    }  
 
     //Extract base64 data ออกมา
     let image = decodeBase64Image(baseImage);
@@ -171,7 +173,7 @@ function decodeBase64Image(base64Str) {
         throw new Error('Invalid base64 string');
     }
 
-    image.type = matches[1];
+    image.type = matches[1]; 
     image.data = matches[2];
 
     return image;

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "start": "pm2-runtime ./bin/www -i max"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@google-cloud/storage": "^6.4.2",
